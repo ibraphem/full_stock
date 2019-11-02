@@ -1,0 +1,38 @@
+ALTER TABLE `customer_payments` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment`;
+ALTER TABLE `receiving_payments` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment`;
+ALTER TABLE `sale_payments` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment`;
+ALTER TABLE `supplier_payments` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment`;
+ALTER TABLE `transactions` ADD `transaction_with` VARCHAR(50) NOT NULL AFTER `transaction_type`;
+
+ALTER TABLE `items` CHANGE `quantity` `quantity` INT(11) NOT NULL DEFAULT '1';
+
+
+changes from 2/6/2018
+
+ALTER TABLE `supplier_payments` ADD `comments` VARCHAR(200) NOT NULL AFTER `payment_type`;
+ALTER TABLE `sale_payments` ADD `comments` VARCHAR(200) NOT NULL AFTER `payment_type`;
+ALTER TABLE `sale_payments` CHANGE `comments` `comments` VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `receiving_payments` ADD `comments` VARCHAR(200) NOT NULL AFTER `payment_type`;
+ALTER TABLE `customer_payments` ADD `comments` VARCHAR(200) NOT NULL AFTER `payment_type`;
+ALTER TABLE `customer_payments` CHANGE `payment_type` `payment_type` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `customer_payments` CHANGE `comments` `comments` VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `supplier_payments` CHANGE `comments` `comments` VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `receiving_payments` CHANGE `payment_type` `payment_type` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `flexible_pos_settings` ADD `owner_name` TEXT NOT NULL AFTER `company_name`;
+ALTER TABLE `flexible_pos_settings` CHANGE `owner_name` `owner_name` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `daily_reports` ADD `sale_profit` DECIMAL(12,2) NOT NULL AFTER `total_dues`;
+ALTER TABLE `daily_reports` ADD `total_profit` DECIMAL(12,2) NOT NULL AFTER `sale_profit`;
+ALTER TABLE `daily_reports` ADD `total_receivings_payment` DECIMAL(12,2) NOT NULL AFTER `total_receivings`;
+ALTER TABLE `daily_reports` ADD `total_receivings_dues` DECIMAL(12,2) NOT NULL AFTER `total_receivings_payment`;
+ALTER TABLE `daily_reports` ADD `total_supplier_payment` DECIMAL(12,2) NOT NULL AFTER `total_receivings_dues`;
+ALTER TABLE `daily_reports` ADD `total_costing` DECIMAL(12,2) NOT NULL AFTER `total_supplier_payment`;
+
+ALTER TABLE `receiving_payments` CHANGE `comments` `comments` VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `customers` ADD `type` TINYINT(4) NOT NULL DEFAULT '1' AFTER `payment`;
+
+ALTER TABLE `permissions` ADD `label` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+//4-4-2019
+INSERT INTO `permissions` (`id`, `label`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES (NULL, 'CreateDaily Reports', 'reports.createdaily', 'web', NULL, NULL), (NULL, 'CreatePast Reports', 'reports.createpast', 'web', NULL, NULL);
+INSERT INTO `permissions` (`id`, `label`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES (NULL, 'GetDaily Reports', 'reports.getdaily', 'web', NULL, NULL), (NULL, 'CreateCustom Items', 'items.customcreate', 'web', NULL, NULL), (NULL, 'PrintSales Reports', 'reports.printsales', 'web', NULL, NULL), (NULL, 'GetAllSale Reports', 'reports.getsalereport', 'web', NULL, NULL);
+

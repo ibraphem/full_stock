@@ -1,0 +1,9 @@
+.info-box .progress .progress-bar.progress-bar-aqua, .progress-bar-info {
+    background-color: #00c0ef;
+}
+.info-box .progress .progress-bar.progress-bar-red, .progress-bar-danger {
+    background-color: #dd4b39;
+}
+.info-box .progress .progress-bar.progress-bar-green, .progress-bar-success {
+    background-color: #6da252;
+}
